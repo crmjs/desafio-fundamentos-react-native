@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import React, {useMemo} from 'react';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-import { View } from 'react-native';
+import {View} from 'react-native';
 
 import {
   Container,
@@ -23,7 +23,7 @@ import {
   SubtotalValue,
 } from './styles';
 
-import { useCart } from '../../hooks/cart';
+import {useCart} from '../../hooks/cart';
 
 import formatValue from '../../utils/formatValue';
 
@@ -36,26 +36,34 @@ interface Product {
 }
 
 const Cart: React.FC = () => {
-  const { increment, decrement, products } = useCart();
+  const {increment, decrement, products} = useCart();
 
   function handleIncrement(id: string): void {
-    // TODO
+    increment(id);
   }
 
   function handleDecrement(id: string): void {
-    // TODO
+    decrement(id);
   }
 
   const cartTotal = useMemo(() => {
-    // TODO RETURN THE SUM OF THE QUANTITY OF THE PRODUCTS IN THE CART
+    const total = products.reduce((acc, product) => {
+      const subTotal = product.price * product.quantity;
 
-    return formatValue(0);
+      return acc + subTotal;
+    }, 0);
+
+    return formatValue(total);
   }, [products]);
 
   const totalItensInCart = useMemo(() => {
-    // TODO RETURN THE SUM OF THE QUANTITY OF THE PRODUCTS IN THE CART
+    const total = products.reduce((acc, product) => {
+      const {quantity} = product;
 
-    return 0;
+      return acc + quantity;
+    }, 0);
+
+    return total;
   }, [products]);
 
   return (
@@ -63,14 +71,14 @@ const Cart: React.FC = () => {
       <ProductContainer>
         <ProductList
           data={products}
-          keyExtractor={item => item.id}
+          keyExtractor={(item) => item.id}
           ListFooterComponent={<View />}
           ListFooterComponentStyle={{
             height: 80,
           }}
-          renderItem={({ item }: { item: Product }) => (
+          renderItem={({item}: {item: Product}) => (
             <Product>
-              <ProductImage source={{ uri: item.image_url }} />
+              <ProductImage source={{uri: item.image_url}} />
               <ProductTitleContainer>
                 <ProductTitle>{item.title}</ProductTitle>
                 <ProductPriceContainer>

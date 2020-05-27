@@ -1,7 +1,7 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import { Image } from 'react-native';
+import {Image} from 'react-native';
 
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
@@ -16,10 +16,10 @@ const AppRoutes: React.FC = () => (
   <App.Navigator
     screenOptions={{
       headerShown: true,
-      cardStyle: { backgroundColor: '#EBEEF8' },
+      cardStyle: {backgroundColor: '#EBEEF8'},
     }}
-    initialRouteName="Dashboard"
-  >
+    // eslint-disable-next-line react/jsx-closing-bracket-location
+    initialRouteName="Dashboard">
     <App.Screen
       options={{
         headerShown: true,
